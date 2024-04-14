@@ -2,8 +2,8 @@
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 # BOT INFORMATION
 date=$(date -R | cut -d " " -f -5)
-export CHATID="1423578532"
-export KEY="5973249718:AAEQEcWIjxwTMylzckC1letVvxwSYRRNepU"
+export CHATID="702916090"
+export KEY="6782550545:AAEQJCiVZvTvu-2vvd5z4I4I4V7-W3lwIyM"
 export TIME="10"
 export URL="https://api.telegram.org/bot$KEY/sendMessage"
 IP=$(wget -qO- ipinfo.io/ip);
