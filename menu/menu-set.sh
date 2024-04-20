@@ -117,6 +117,9 @@ echo -e "   ${BICyan}[${BIGreen}11${BICyan}]${BIGreen} Webmin${NC}"
 echo -e "   ${BICyan}[${BIGreen}12${BICyan}]${BIGreen} UPDATE SCRIPT${NC}"
 echo -e "   ${BICyan}[${BIGreen}13${BICyan}]${BIGreen} Tendang User Mullog${NC}"
 echo -e "   ${BICyan}[${BIGreen}14${BICyan}]${BIGreen} About SCRIPT${NC}"
+echo -e "   ${BICyan}[${BIGreen}15${BICyan}]${BIGreen} Atur Jam Reboot${NC}"
+echo -e "   ${BICyan}[${BIGreen}16${BICyan}]${BIGreen} INSTALL UDP${NC}"
+echo -e "   ${BICyan}[${BIGreen}17${BICyan}]${BIGreen} INSTALL UDPGW MINI${NC}"
 echo -e "   ${BICyan}[${BIGreen}0${BICyan}]${BIGreen}  Back To Menu${NC}"
 echo -e "   ${BICyan}[${BIGreen}x${BICyan}]${BIGreen}  Exit${NC}"
 echo -e " └───────────────────────────────────────────────┘" | lolcat
@@ -138,6 +141,32 @@ case $opt in
 12 | 12) clear ; update ;;
 13 | 13) clear ; tendang ;;
 14 | 14) clear ; about ;;
+15 | 15) clear ; jam ;;
+16 | 16) clear ; wget https://raw.githubusercontent.com/daneshswara29/v6/main/udpcustom/udp-custom.sh && chmod +x udp-custom.sh && ./udp-custom.sh ;;
+17 | 17) clear ;
+echo -e "PROSES INSTALASI UDPGW MINI 7100, 7200, 7300"; sleep 5;
+
+mkdir -p /usr/local/kyt/
+wget -q -O /usr/local/kyt/udp-mini "https://raw.githubusercontent.com/daneshswara29/v6/main/udpcustom/udp-mini"
+chmod +x /usr/local/kyt/udp-mini
+wget -q -O /etc/systemd/system/udp-mini-1.service "https://raw.githubusercontent.com/daneshswara29/v6/main/udpcustom/udp-mini-1.service"
+wget -q -O /etc/systemd/system/udp-mini-2.service "https://raw.githubusercontent.com/daneshswara29/v6/main/udpcustom/udp-mini-2.service"
+wget -q -O /etc/systemd/system/udp-mini-3.service "https://raw.githubusercontent.com/daneshswara29/v6/main/udpcustom/udp-mini-3.service"
+systemctl disable udp-mini-1
+systemctl stop udp-mini-1
+systemctl enable udp-mini-1
+systemctl start udp-mini-1
+systemctl disable udp-mini-2
+systemctl stop udp-mini-2
+systemctl enable udp-mini-2
+systemctl start udp-mini-2
+systemctl disable udp-mini-3
+systemctl stop udp-mini-3
+systemctl enable udp-mini-3
+systemctl start udp-mini-3
+
+echo -e "INSTALASI SUCCESS UDPGW MINI 7100, 7200, 7300"; sleep 5;
+exit ;;
 00 | 0) clear ; menu ;;
 x) exit ;;
 *) clear ; menu-set ;;

@@ -197,7 +197,9 @@ datediff() {
     echo -e "${z}        │$NC$y  Expiry In$NC     $Blue:$NC$r $(( (d1 - d2) / 86400 ))$NC Days "
 }
 mai="datediff "$Exp" "$DATE""
-echo -e "${z}        ┌─────────────────────────────────────┐" 
+echo -e "     ${BICyan} SSH ${NC}: $ressh"" ${BICyan} NGINX ${NC}: $resngx"" ${BICyan}  XRAY ${NC}: $resv2r"" ${BICyan} TROJAN ${NC}: $resv2r"
+echo -e "     ${BICyan} DROPBEAR ${NC}: $resdbr" "${BICyan} SSH-WS ${NC}: $ressshws" Stunnel ${NC}: $sshstunel" "${BICyan}
+echo -e "${BICyan}        ┌─────────────────────────────────────┐" 
 echo -e "${z}        │$NC$y  User$NC          $Blue:$NC $Name " 
 if [ $exp \< 1000 ];
 then
@@ -206,8 +208,10 @@ else
     datediff "$Exp" "$DATE"
 fi;
 echo -e "${z}        └─────────────────────────────────────┘"
-echo -e "               ${z}SSH :${NC}${purple} $ssh1$NC ${z}VMESS :${NC}${purple} $vma ${NC}${z}VLESS :${NC}${purple} $vla${NC}"
-echo -e "                    ${z}TROJAN :${NC}${purple} $trb ${NC}${z}SHDWSK :${NC}${purple} $ssa${NC}"
+echo -e "${BICyan} ┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "${BICyan} │  ${BIYellow}SSH         VMESS           VLESS          TROJAN $NC"
+echo -e "${BICyan} │  ${Blue} $ssh1            $vma               $vla               $trb $NC"
+echo -e "${BICyan} └─────────────────────────────────────────────────────┘${NC}"
 echo -e " ${z}┌─────────────────────────────────────────────────────┐"
 echo -e "    $r 1.$NC $purple MENU SSH$NC                $r 6.$NC $purple BACKUP/RESTORE$NC" 
 echo -e "    $r 2.$NC $purple MENU VMESS$NC              $r 7.$NC $purple SETTINGS$NC"    
