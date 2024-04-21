@@ -110,7 +110,49 @@ rm -f /home/needupdate > /dev/null 2>&1
 else
 Exp=$(curl -sS https://raw.githubusercontent.com/daneshswara29/izin/main/ip | grep $MYIP | awk '{print $3}')
 fi
-
+# usage
+vnstat_profile=$(vnstat | sed -n '3p' | awk '{print $1}' | grep -o '[^:]*')
+vnstat -i ${vnstat_profile} >/root/t1
+bulan=$(date +%b)
+today=$(vnstat -i ${vnstat_profile} | grep today | awk '{print $8}')
+todayd=$(vnstat -i ${vnstat_profile} | grep today | awk '{print $8}')
+today_v=$(vnstat -i ${vnstat_profile} | grep today | awk '{print $9}')
+today_rx=$(vnstat -i ${vnstat_profile} | grep today | awk '{print $2}')
+today_rxv=$(vnstat -i ${vnstat_profile} | grep today | awk '{print $3}')
+today_tx=$(vnstat -i ${vnstat_profile} | grep today | awk '{print $5}')
+today_txv=$(vnstat -i ${vnstat_profile} | grep today | awk '{print $6}')
+if [ "$(grep -wc ${bulan} /root/t1)" != '0' ]; then
+    bulan=$(date +%b)
+    month=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $9}')
+    month_v=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $10}')
+    month_rx=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $3}')
+    month_rxv=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $4}')
+    month_tx=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $6}')
+    month_txv=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $7}')
+else
+    bulan=$(date +%Y-%m)
+    month=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $8}')
+    month_v=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $9}')
+    month_rx=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $2}')
+    month_rxv=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $3}')
+    month_tx=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $5}')
+    month_txv=$(vnstat -i ${vnstat_profile} | grep "$bulan " | awk '{print $6}')
+fi
+if [ "$(grep -wc yesterday /root/t1)" != '0' ]; then
+    yesterday=$(vnstat -i ${vnstat_profile} | grep yesterday | awk '{print $8}')
+    yesterday_v=$(vnstat -i ${vnstat_profile} | grep yesterday | awk '{print $9}')
+    yesterday_rx=$(vnstat -i ${vnstat_profile} | grep yesterday | awk '{print $2}')
+    yesterday_rxv=$(vnstat -i ${vnstat_profile} | grep yesterday | awk '{print $3}')
+    yesterday_tx=$(vnstat -i ${vnstat_profile} | grep yesterday | awk '{print $5}')
+    yesterday_txv=$(vnstat -i ${vnstat_profile} | grep yesterday | awk '{print $6}')
+else
+    yesterday=NULL
+    yesterday_v=NULL
+    yesterday_rx=NULL
+    yesterday_rxv=NULL
+    yesterday_tx=NULL
+    yesterday_txv=NULL
+fi
 # // Clear
 clear
 clear && clear && clear
@@ -164,7 +206,7 @@ Blue="\033[0;34m"
 y='\033[1;33m' #yellow
 g="\033[1;92m"
 IPVPS=$(curl -s ipinfo.io/ip )
-ISPVPS=$( curl -s ipinfo.io/org )
+ISPVPS=$(curl -s ipinfo.io/org )
 #######################
 vlx=$(grep -c -E "^#& " "/etc/xray/config.json")
 let vla=$vlx/2
@@ -176,49 +218,60 @@ let trb=$trx/2
 ssx=$(grep -c -E "^#ss# " "/etc/xray/config.json")
 let ssa=$ssx/2
 ########################
+uphours=`uptime -p | awk '{print $2,$3}' | cut -d , -f1`
+upminutes=`uptime -p | awk '{print $4,$5}' | cut -d , -f1`
+uptimecek=`uptime -p | awk '{print $6,$7}' | cut -d , -f1`
+cekup=`uptime -p | grep -ow "day"`
 clear
-echo -e " ${z}           ┌───────────────────────────────┐$NC"
-echo -e " ${z}           │  ${NC}${g} .::.${NC} DANESHSWARA ${g} .::. $NC"
-echo -e " ${z}           └───────────────────────────────┘$NC"
-echo -e "${z} ┌─────────────────────────────────────────────────────┐${NC}"
-echo -e " ${z}│$NC  $y System OS ${NC}        $Blue:$NC  "`hostnamectl | grep "Operating System" | cut -d ' ' -f5-` $NC
-echo -e " ${z}│$NC  $y Server Ram ${NC}       $Blue:$NC  $uram MB/ $tram MB${NC}"
-echo -e " ${z}│$NC  $y CPU Usage ${NC}        $Blue:$NC  $cpu_usage ${NC}"
-echo -e " ${z}│$NC  $y ISP ${NC}              $Blue:$NC  $ISPVPS${NC}"
-echo -e " ${z}│$NC  $y CITY ${NC}             $Blue:$NC  $(curl -s ipinfo.io/timezone )${NC}"
-echo -e " ${z}│$NC  $y Domain ${NC}           $Blue:$NC  $(cat /etc/xray/domain)${NC}"
-echo -e " ${z}│$NC  $y IP-VPS ${NC}           $Blue:$NC  $IPVPS${NC}"
-echo -e " ${z}│$NC  $y Date & Time ${NC}      $Blue:$NC  $( date -d "0 days" +"%d-%m-%Y | %X" ) ${NC}"
-echo -e " ${z}└─────────────────────────────────────────────────────┘${NC}"
+echo -e " ${BIBlue}           ┌───────────────────────────────┐$NC"
+echo -e " ${BIBlue}           │      ${NC}${BIBlue}.::.${BIYellow}DANESHSWARA${BIBlue}.::.$NC    " ${BIBlue} │
+echo -e " ${BIBlue}           └───────────────────────────────┘$NC"
+echo -e "${BIBlue} ┌─────────────────────────────────────────────────────┐${NC}"
+echo -e " ${BIBlue}│$NC  $y System OS ${NC}        $Blue:$NC  "`hostnamectl | grep "Operating System" | cut -d ' ' -f5-` $NC
+echo -e " ${BIBlue}│$NC  $y Server Ram ${NC}       $Blue:$NC  $uram MB/ $tram MB${NC}"
+echo -e " ${BIBlue}│$NC  $y CPU Usage ${NC}        $Blue:$NC  $cpu_usage ${NC}"
+echo -e " ${BIBlue}│$NC  $y ISP ${NC}              $Blue:$NC  $(curl -s ipinfo.io/org)${NC}"
+echo -e " ${BIBlue}│$NC  $y CITY ${NC}             $Blue:$NC  $(curl -s ipinfo.io/timezone )${NC}"
+echo -e " ${BIBlue}│$NC  $y Domain ${NC}           $Blue:$NC  $(cat /etc/xray/domain)${NC}"
+echo -e " ${BIBlue}│$NC  $y IP-VPS ${NC}           $Blue:$NC  $IPVPS${NC}"
+echo -e " ${BIBlue}│$NC  $y Date & Time ${NC}      $Blue:$NC  $( date -d "0 days" +"%d-%m-%Y | %X" ) ${NC}"
+echo -e " ${BIBlue}│$NC  $y System Uptime ${NC}    ${Blue}: $NC $uphours $upminutes $uptimecek"
+echo -e " ${BIBlue}└─────────────────────────────────────────────────────┘${NC}"
 DATE=$(date +'%d %B %Y')
 datediff() {
     d1=$(date -d "$1" +%s)
     d2=$(date -d "$2" +%s)
-    echo -e "${z}        │$NC$y  Expiry In$NC     $Blue:$NC$r $(( (d1 - d2) / 86400 ))$NC Days "
+    echo -e "${BIYellow}         $NC$y  Expiry In$NC     $Blue:$NC$BIBlue $(( (d1 - d2) / 86400 ))$BIBlue Days "
 }
 mai="datediff "$Exp" "$DATE""
 echo -e "     ${BICyan} SSH ${NC}: $ressh"" ${BICyan} NGINX ${NC}: $resngx"" ${BICyan}  XRAY ${NC}: $resv2r"" ${BICyan} TROJAN ${NC}: $resv2r"
-echo -e "     ${BICyan} DROPBEAR ${NC}: $resdbr" "${BICyan} SSH-WS ${NC}: $ressshws" Stunnel ${NC}: $sshstunel" "${BICyan}
-echo -e "${BICyan}        ┌─────────────────────────────────────┐" 
-echo -e "${z}        │$NC$y  User$NC          $Blue:$NC $Name " 
+echo -e "   ${BICyan}     STUNNEL ${NC}: $resst" "${BICyan} DROPBEAR ${NC}: $resdbr" "${BICyan} SSH-WS ${NC}: $ressshws"
+echo -e "${BIBlue} ┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "   $r ${BIYellow}Traffic${NC}      ${BIYellow}Today       Yesterday       Month   ${NC}"
+echo -e "   $r ${BIBlue}Download${NC}   ${BIBlue}$today_tx $today_txv      $yesterday_tx $yesterday_txv      $month_tx $month_txv   ${NC}"
+echo -e "   $r ${BIBlue}Upload${NC}     ${BIBlue}$today_rx $today_rxv      $yesterday_rx $yesterday_rxv      $month_rx $month_rxv   ${NC}"
+echo -e "   $r ${BIBlue}Total${NC}    ${BIBlue}  $todayd $today_v     $yesterday $yesterday_v      $month $month_v  ${NC} "
+echo -e " ${BIBlue}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BIBlue}        ┌─────────────────────────────────────┐" 
+echo -e "${BIYellow}         $NC$y  User$NC          $Blue:$BIBlue $Name " 
 if [ $exp \< 1000 ];
 then
-echo -e "       $z│$NC$y License      : ${GREEN}$sisa_hari$NC Days Tersisa $NC"
+echo -e "       $z $NC$y License      : $b $sisa_hari $b Days Tersisa $NC"
 else
     datediff "$Exp" "$DATE"
 fi;
-echo -e "${z}        └─────────────────────────────────────┘"
-echo -e "${BICyan} ┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "${BICyan} │  ${BIYellow}SSH         VMESS           VLESS          TROJAN $NC"
-echo -e "${BICyan} │  ${Blue} $ssh1            $vma               $vla               $trb $NC"
-echo -e "${BICyan} └─────────────────────────────────────────────────────┘${NC}"
-echo -e " ${z}┌─────────────────────────────────────────────────────┐"
-echo -e "    $r 1.$NC $purple MENU SSH$NC                $r 6.$NC $purple BACKUP/RESTORE$NC" 
-echo -e "    $r 2.$NC $purple MENU VMESS$NC              $r 7.$NC $purple SETTINGS$NC"    
-echo -e "    $r 3.$NC $purple MENU VLESS$NC              $r 8.$NC $purple INFO PORT$NC"    
-echo -e "    $r 4.$NC $purple MENU TROJAN$NC             $r 9.$NC $purple INFO SERVER$NC" 
-echo -e "    $r 5.$NC $purple SHADOWSOCKS$NC             $r x.$NC $purple EXIT SCRIPT$NC"     
-echo -e " ${z}└─────────────────────────────────────────────────────┘"
+echo -e "${BIBlue}        └─────────────────────────────────────┘"
+echo -e "${BIBlue} ┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "${BICyan}    ${BIYellow}SSH         VMESS           VLESS          TROJAN $NC"
+echo -e "${BICyan}    ${Blue} $ssh1           $vma               $vla              $trb $NC"
+echo -e "${BIBlue} └─────────────────────────────────────────────────────┘${NC}"
+echo -e " ${BIBlue}┌─────────────────────────────────────────────────────┐"
+echo -e "    $y 1.$NC $BIBlue MENU SSH$NC                $y 6.$NC $BIBlue BACKUP/RESTORE$NC" 
+echo -e "    $y 2.$NC $BIBlue MENU VMESS$NC              $y 7.$NC $BIBlue SETTINGS$NC"    
+echo -e "    $y 3.$NC $BIBlue MENU VLESS$NC              $y 8.$NC $BIBlue INFO PORT$NC"    
+echo -e "    $y 4.$NC $BIBlue MENU TROJAN$NC             $y 9.$NC $BIBlue CEK AKUN$NC" 
+echo -e "    $y 5.$NC $BIBlue SHADOWSOCKS$NC             $y x.$NC $BIBlue EXIT SCRIPT$NC"     
+echo -e " ${BIBlue}└─────────────────────────────────────────────────────┘"
 echo -e "                   Version : 1.4.2 ${NC}" | lolcat
 echo -e "                   _______________${NC}" | lolcat
 echo
@@ -233,9 +286,9 @@ case $opt in
 6) clear ; menu-backup ;;
 7) clear ; menu-set ;;
 8) clear ; info ;;
-9) clear ; infoserv ;;
+9) clear ; cat /etc/log-create-user.log ;;
 99) clear ; update ;;
 0) clear ; menu ;;
 x) exit ;;
-*) echo -e "" ; echo "Press any key to back exit" ; sleep 1 ; exit ;;
+*) echo -e "" ; echo "Press any key to back exit" ; sleep 1 ; menu ;;
 esac
