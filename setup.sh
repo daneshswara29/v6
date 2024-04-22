@@ -445,7 +445,7 @@ echo -e "└──────────────────────�
 wget -q https://raw.githubusercontent.com/daneshswara29/v6/main/backup/set-br.sh && chmod +x set-br.sh && ./set-br.sh
 
 # // Download Data
-echo -e "${GREEN}Download Data${NC}"
+#echo -e "${GREEN}Download Data${NC}"
 wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/daneshswara29/v6/main/usernew.sh"
 wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/daneshswara29/v6/main/add-ws.sh"
 wget -q -O /usr/bin/add-ssws "https://raw.githubusercontent.com/daneshswara29/v6/main/add-ssws.sh"
