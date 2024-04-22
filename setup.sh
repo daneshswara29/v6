@@ -444,7 +444,7 @@ echo -e " \E[41;1;39m            >>> Install BR <<<           \E[0m$NC"
 echo -e "└─────────────────────────────────────────┘"
 wget -q https://raw.githubusercontent.com/daneshswara29/v6/main/backup/set-br.sh && chmod +x set-br.sh && ./set-br.sh
 
-# // Download Data
+#Download Data
 #echo -e "${GREEN}Download Data${NC}"
 wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/daneshswara29/v6/main/usernew.sh"
 wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/daneshswara29/v6/main/add-ws.sh"
@@ -502,6 +502,7 @@ wget -q -O /usr/bin/quota-vless-ws "https://raw.githubusercontent.com/daneshswar
 wget -q -O /usr/bin/quota-vless-grpc "https://raw.githubusercontent.com/daneshswara29/v6/main/tools/limit/quota-vless-grpc.sh"
 wget -q -O /usr/bin/quota-vmess-orbit "https://raw.githubusercontent.com/daneshswara29/v6/main/tools/limit/quota-vmess-ws-orbit.sh"
 wget -q -O /usr/bin/quota-vmess-orbit1 "https://raw.githubusercontent.com/daneshswara29/v6/main/tools/limit/quota-vmess-ws-orbit1.sh"
+wget -q -O /usr/bin/jam "https://raw.githubusercontent.com/daneshswara29/v6/main/jam.sh"
 chmod +x /usr/bin/*
 cd 
 chmod +x /usr/bin/usernew
@@ -533,6 +534,7 @@ chmod +x /usr/bin/menu-set
 chmod +x /usr/bin/info
 chmod +x /usr/bin/infoserv
 chmod +x /usr/bin/about
+chmod +x /usr/bin/jam
 
 
 #cat > /etc/cron.d/re_otm <<-END
