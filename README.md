@@ -1,3 +1,9 @@
+
+
+### UPDATE UBUNTU 
+<pre><code>apt-get update && apt-get upgrade -y && apt dist-upgrade -y && update-grub && reboot</code></pre>
+
+
 ### INSTAL
 <pre><code>wget -O setup.sh https://raw.githubusercontent.com/daneshswara29/v6/main/setup.sh && chmod +x setup.sh && ./setup.sh</code></pre>
 
