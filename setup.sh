@@ -121,7 +121,7 @@ echo "$localip $(hostname)" >> /etc/hosts
 fi
 mkdir -p /etc/xray
 
-echo -e "${tyblue} Welcome To Script Premium Daneshswara${NC} "
+echo -e "${tyblue} Welcome To Script Premium ANGGUN${NC} "
 sleep 2
 echo -e "[ ${green}INFO${NC} ] Mempersiapkan Instal File"
 apt install git curl -y >/dev/null 2>&1
@@ -236,11 +236,11 @@ mkdir -p /var/www/html
 # // String / Request Data
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c5)
 subsl=$(</dev/urandom tr -dc a-z0-9 | head -c5)
-DOMAIN=daneshswara.online
-SUB_DOMAIN=${sub}.daneshswara.online
-NS_DOMAIN=${subsl}.daneshswara.online
-CF_ID=okysmilee3@gmail.com
-CF_KEY=f08965a2c5f0ace8d3ded8e5a7ddeb2f08b6a
+DOMAIN=anggunre.shop
+SUB_DOMAIN=${sub}.anggunre.shop
+NS_DOMAIN=${subsl}.anggunre.shop
+CF_ID=arismar.amar@gmail.com
+CF_KEY=88ecae78b53455a919ccecd22bdbd0332f7c7
 set -euo pipefail
 IP=$(curl -sS ifconfig.me);
 echo "Updating DNS for ${SUB_DOMAIN}..."
@@ -444,8 +444,8 @@ echo -e " \E[41;1;39m            >>> Install BR <<<           \E[0m$NC"
 echo -e "└─────────────────────────────────────────┘"
 wget -q https://raw.githubusercontent.com/daneshswara29/v6/main/backup/set-br.sh && chmod +x set-br.sh && ./set-br.sh
 
-#Download Data
-#echo -e "${GREEN}Download Data${NC}"
+# // Download Data
+echo -e "${GREEN}Download Data${NC}"
 wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/daneshswara29/v6/main/usernew.sh"
 wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/daneshswara29/v6/main/add-ws.sh"
 wget -q -O /usr/bin/add-ssws "https://raw.githubusercontent.com/daneshswara29/v6/main/add-ssws.sh"
@@ -502,7 +502,6 @@ wget -q -O /usr/bin/quota-vless-ws "https://raw.githubusercontent.com/daneshswar
 wget -q -O /usr/bin/quota-vless-grpc "https://raw.githubusercontent.com/daneshswara29/v6/main/tools/limit/quota-vless-grpc.sh"
 wget -q -O /usr/bin/quota-vmess-orbit "https://raw.githubusercontent.com/daneshswara29/v6/main/tools/limit/quota-vmess-ws-orbit.sh"
 wget -q -O /usr/bin/quota-vmess-orbit1 "https://raw.githubusercontent.com/daneshswara29/v6/main/tools/limit/quota-vmess-ws-orbit1.sh"
-wget -q -O /usr/bin/jam "https://raw.githubusercontent.com/daneshswara29/v6/main/jam.sh"
 chmod +x /usr/bin/*
 cd 
 chmod +x /usr/bin/usernew
@@ -534,7 +533,6 @@ chmod +x /usr/bin/menu-set
 chmod +x /usr/bin/info
 chmod +x /usr/bin/infoserv
 chmod +x /usr/bin/about
-chmod +x /usr/bin/jam
 
 
 #cat > /etc/cron.d/re_otm <<-END
