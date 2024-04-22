@@ -121,7 +121,7 @@ echo "$localip $(hostname)" >> /etc/hosts
 fi
 mkdir -p /etc/xray
 
-echo -e "${tyblue} Welcome To Script Premium ANGGUN${NC} "
+echo -e "${tyblue} Welcome To Script Premium DANESHSWARA${NC} "
 sleep 2
 echo -e "[ ${green}INFO${NC} ] Mempersiapkan Instal File"
 apt install git curl -y >/dev/null 2>&1
@@ -236,11 +236,11 @@ mkdir -p /var/www/html
 # // String / Request Data
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c5)
 subsl=$(</dev/urandom tr -dc a-z0-9 | head -c5)
-DOMAIN=anggunre.shop
-SUB_DOMAIN=${sub}.anggunre.shop
-NS_DOMAIN=${subsl}.anggunre.shop
-CF_ID=arismar.amar@gmail.com
-CF_KEY=88ecae78b53455a919ccecd22bdbd0332f7c7
+DOMAIN=daneshswara.online
+SUB_DOMAIN=${sub}.daneshswara.online
+NS_DOMAIN=${subsl}.daneshswara.online
+CF_ID=okysmilee3@gmail.com
+CF_KEY=f08965a2c5f0ace8d3ded8e5a7ddeb2f08b6a
 set -euo pipefail
 IP=$(curl -sS ifconfig.me);
 echo "Updating DNS for ${SUB_DOMAIN}..."
